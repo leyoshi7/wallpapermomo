@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Free original wallpapers for phone, tablet and desktop by Wallpaper Momo.">
+<meta property="og:title" content="Wallpaper Momo">
+<meta property="og:description" content="Free original wallpapers for phone, tablet and desktop.">
+<meta name="theme-color" content="#0E0B1D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232A1E4D'/%3E%3Cpath d='M22 70V30l14 22 14-22v40' fill='none' stroke='%23C9C2E3' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cellipse cx='68' cy='50' rx='11' ry='18' fill='none' stroke='%23C9C2E3' stroke-width='10'/%3E%3C/svg%3E">
+<style>html{color-scheme:dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Wallpaper Momo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;800&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: immersive showcase. The selected wallpaper becomes the page's ambient light; device mockups in the hero; a glass rail to switch collections; gallery below. Single dark look by choice. */
+:root {
+  --bg: #0E0B1D;
+  --glass: rgba(255, 255, 255, .06);
+  --glass-line: rgba(255, 255, 255, .12);
+  --fg: #F3F0FB;
+  --muted: #A9A2C9;
+  --accent: #8B7CC7;
+  --accent-ink: #0E0B1D;
+  --blue: #C9C2E3;
+  --blue-soft: rgba(90, 59, 140, .32);
+  --display: "Unbounded", "Segoe UI", system-ui, sans-serif;
+  --body: "Manrope", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); color: var(--fg); }
+body { font-family: var(--body); font-size: 16px; line-height: 1.6; padding-inline: 0; padding-block: 0; overflow-x: hidden; }
+
+/* Ambient light from the selected wallpaper */
+.ambient { position: fixed; inset: -10%; z-index: 0; pointer-events: none; }
+.ambient img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; filter: blur(70px) saturate(1.4); opacity: 0; transition: opacity 1.2s ease; }
+.ambient img.on { opacity: .35; }
+.ambient::before { content: ""; position: absolute; inset: 0; z-index: 1; background: radial-gradient(40% 45% at 80% 15%, rgba(139,124,199,.38), transparent 70%), radial-gradient(45% 50% at 10% 80%, rgba(90,59,140,.45), transparent 70%); }
+.ambient::after { content: ""; position: absolute; inset: 0; z-index: 2; background: radial-gradient(ellipse at 50% 30%, rgba(14,11,29,.1), rgba(14,11,29,.82) 72%); }
+.grain { position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .07; }
+
+.page { position: relative; z-index: 2; padding-inline: 20px; padding-block: 0 56px; }
+.wrap { max-width: 1200px; margin-inline: auto; }
+
+nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 22px; }
+.logo { font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: -.02em; display: flex; align-items: center; gap: 10px; }
+.logo i { width: 28px; height: 28px; border-radius: 9px; background: conic-gradient(from 200deg, var(--accent), var(--blue), var(--accent)); display: inline-block; }
+.pill { font-size: 13px; color: var(--muted); border: 1px solid var(--glass-line); background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 999px; padding: 6px 14px; font-variant-numeric: tabular-nums; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: center; padding-block: 32px 40px; }
+.eyebrow { color: var(--blue); font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 12px; }
+.hero h1 { font-family: var(--display); font-weight: 800; font-size: clamp(38px, 5.6vw, 76px); line-height: 1.04; margin: 0 0 18px; letter-spacing: -.035em; text-wrap: balance; }
+.hero h1 .shine { background: linear-gradient(100deg, var(--accent) 10%, #B48CFF 30%, var(--blue) 55%, #F3F0FB 75%, var(--accent) 95%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 6s linear infinite; }
+@keyframes shine { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+.hero p.lede { color: var(--muted); font-size: 18px; margin: 0 0 28px; max-width: 30em; }
+.current { font-family: var(--display); font-weight: 500; font-size: 22px; letter-spacing: -.01em; margin: 0 0 4px; transition: opacity .4s; }
+.current-desc { color: var(--muted); margin: 0 0 20px; transition: opacity .4s; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.btn {
+  font: inherit; font-weight: 600; font-size: 15px; border-radius: 14px; padding: 12px 20px; min-height: 48px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 10px; border: 1px solid transparent; transition: transform .2s ease, background .2s, box-shadow .2s;
+}
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn small { font-weight: 400; opacity: .75; font-size: 12px; direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 10px 30px -10px var(--accent); }
+.btn.ghost { background: var(--blue-soft); color: var(--fg); border-color: rgba(139,124,199,.5); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.btn:hover { transform: translateY(-2px); }
+.btn[disabled] { opacity: .6; cursor: progress; transform: none; }
+:is(.btn, .chip, .tile, .close):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Devices */
+.stage { position: relative; aspect-ratio: 7 / 5; width: 100%; perspective: 1400px; }
+.laptop { position: absolute; inset-inline-end: 0; top: 6%; width: 86%; transform: rotateY(8deg) rotateX(4deg); transform-style: preserve-3d; transition: transform .6s ease; }
+.screen { position: relative; background: #120E24; border: 1px solid #3A3A52; border-radius: 16px 16px 6px 6px; padding: 2.2%; box-shadow: 0 40px 80px -30px rgba(0,0,0,.8); }
+.screen .view { position: relative; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #111; }
+.base { height: 14px; margin-inline: -6%; background: linear-gradient(#3A3A52, #1A1530); border-radius: 0 0 18px 18px; position: relative; }
+.base::before { content: ""; position: absolute; top: 0; inset-inline: 42%; height: 5px; background: #0E0B1D; border-radius: 0 0 8px 8px; }
+.phone { position: absolute; inset-inline-start: 2%; bottom: 0; width: 27%; transform: rotateY(-10deg) rotateZ(-3deg); transition: transform .6s ease; }
+.phone .body { background: #120E24; border: 1px solid #3A3A52; border-radius: 34px; padding: 6%; box-shadow: 0 40px 70px -20px rgba(0,0,0,.85); }
+.phone .view { position: relative; aspect-ratio: 390 / 844; border-radius: 26px; overflow: hidden; background: #111; }
+.phone .island { position: absolute; top: 3%; inset-inline: 0; margin-inline: auto; width: 32%; height: 3.4%; background: #000; border-radius: 999px; z-index: 2; }
+.phone .clock { position: absolute; top: 10%; inset-inline: 0; text-align: center; z-index: 2; color: #fff; font-family: var(--display); font-weight: 300; font-size: clamp(22px, 3.4vw, 40px); direction: ltr; text-shadow: 0 2px 12px rgba(0,0,0,.4); font-variant-numeric: tabular-nums; }
+.view img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity .9s ease, transform 1.4s ease; }
+.view img.on { opacity: 1; transform: scale(1); }
+.stage:hover .laptop { transform: rotateY(3deg) rotateX(2deg); }
+.stage:hover .phone { transform: rotateY(-4deg) rotateZ(-1deg) translateY(-6px); }
+
+/* Collection rail */
+.rail { display: flex; gap: 10px; flex-wrap: wrap; padding: 8px; border-radius: 20px; background: var(--glass); border: 1px solid var(--glass-line); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); width: fit-content; max-width: 100%; margin-block: 8px 0; }
+.chip { font: inherit; display: flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; min-height: 48px; border-radius: 14px; border: 1px solid transparent; background: transparent; color: var(--fg); cursor: pointer; transition: background .25s, border-color .25s; }
+.chip img { width: 36px; height: 36px; border-radius: 10px; object-fit: cover; }
+.chip[aria-pressed="true"] { background: var(--blue-soft); border-color: rgba(139,124,199,.6); }
+.chip span { font-weight: 500; font-size: 15px; }
+.progress { height: 2px; background: var(--glass-line); border-radius: 2px; overflow: hidden; margin-top: 14px; max-width: 220px; }
+.progress b { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+.progress b.run { animation: fill 7s linear forwards; }
+@keyframes fill { to { width: 100%; } }
+
+/* Gallery */
+.section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-block: 72px 24px; }
+.section-head h2 { font-family: var(--display); font-weight: 800; font-size: clamp(26px, 3.4vw, 40px); margin: 0; letter-spacing: -.03em; }
+.section-head p { margin: 6px 0 0; color: var(--muted); }
+[hidden] { display: none !important; }
+.laptop { opacity: 1; transition: transform .6s ease, opacity .6s ease; }
+.stage.phone-only .laptop { opacity: .18; }
+
+/* Cards: one per wallpaper */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 22px; }
+.card { font: inherit; color: var(--fg); text-align: start; display: flex; flex-direction: column; gap: 14px; padding: 10px 10px 16px; border-radius: 26px; border: 1px solid var(--glass-line); background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: transform .3s ease, border-color .3s, box-shadow .3s; }
+.card:hover { transform: translateY(-4px); border-color: rgba(139,124,199,.65); box-shadow: 0 30px 60px -30px rgba(0,0,0,.9); }
+.card-open { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; width: 100%; display: block; cursor: pointer; border-radius: 18px; text-align: start; }
+.card-open:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.card[hidden] { display: none !important; }
+
+/* Toolbar: search + sections */
+.toolbar { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+.search { position: relative; display: block; max-width: 440px; }
+.search svg { position: absolute; inset-inline-start: 16px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.search input { font: inherit; font-size: 16px; width: 100%; min-height: 50px; padding: 0 16px 0 46px; border-radius: 16px; border: 1px solid var(--glass-line); background: var(--glass); color: var(--fg); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); outline: none; transition: border-color .2s, box-shadow .2s; }
+.search input::placeholder { color: var(--muted); }
+.search input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(139,124,199,.18); }
+.tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px 2px 6px; margin-inline: -2px; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { font: inherit; flex: none; font-weight: 600; font-size: 14px; min-height: 42px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--glass-line); background: var(--glass); color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background .2s, color .2s, border-color .2s; }
+.tab:hover { color: var(--fg); }
+.tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 56px 20px; border: 1px dashed var(--glass-line); border-radius: 24px; }
+.empty strong { display: block; color: var(--fg); font-family: var(--display); font-weight: 500; font-size: 18px; margin-bottom: 6px; }
+
+/* Like */
+.like { font: inherit; display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; color: var(--muted); font-weight: 700; font-size: 13px; cursor: pointer; padding: 6px 8px; border-radius: 999px; min-height: 36px; font-variant-numeric: tabular-nums; transition: color .2s, background .2s; flex: none; }
+.like svg { width: 19px; height: 19px; transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
+.like:hover { background: var(--glass); }
+.like[aria-pressed="true"] { color: #B48CFF; }
+.like[aria-pressed="true"] svg path { fill: currentColor; }
+.like.pop svg { transform: scale(1.35); }
+.like:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.rank { position: absolute; top: 10px; inset-inline-end: 10px; font-size: 12px; font-weight: 800; background: rgba(14,11,29,.75); color: var(--fg); padding: 4px 9px; border-radius: 999px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+
+/* Detail actions */
+.d-actions { display: flex; justify-content: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+.d-actions .like, .d-actions .share-btn { min-height: 46px; padding: 0 20px; font-size: 15px; border: 1px solid var(--glass-line); background: var(--glass); color: var(--fg); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 999px; }
+.d-actions .like[aria-pressed="true"] { color: #B48CFF; border-color: rgba(180,140,255,.6); }
+.share-btn { font: inherit; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+.share-btn svg { width: 18px; height: 18px; }
+
+/* Share sheet */
+.sheet { position: fixed; inset: 0; z-index: 30; background: rgba(14,11,29,.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: flex; align-items: flex-end; justify-content: center; padding: 16px; }
+.sheet-box { width: 100%; max-width: 420px; background: #1A1433; border: 1px solid var(--glass-line); border-radius: 24px; padding: 20px; padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); animation: rise .35s cubic-bezier(.2,.7,.2,1) both; }
+.sheet-box h3 { font-family: var(--display); font-weight: 500; font-size: 17px; margin: 0 0 14px; text-align: center; }
+.sheet-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.sheet-row a, .sheet-row button { font: inherit; font-weight: 600; font-size: 13px; color: var(--fg); text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 6px; border-radius: 16px; background: var(--glass); border: 1px solid var(--glass-line); cursor: pointer; }
+.sheet-row i { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 20px; }
+.sheet-close { font: inherit; width: 100%; margin-top: 12px; min-height: 46px; border-radius: 14px; border: 0; background: var(--blue-soft); color: var(--fg); font-weight: 600; cursor: pointer; }
+.cover { position: relative; aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden; background: #111; }
+.cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+.card:hover .cover img { transform: scale(1.05); }
+.cover .new { position: absolute; top: 10px; inset-inline-start: 10px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: var(--accent); color: var(--accent-ink); padding: 4px 9px; border-radius: 999px; }
+.card-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-inline: 6px; }
+.card-meta strong { font-family: var(--display); font-weight: 500; font-size: 15px; letter-spacing: -.01em; }
+.fmts { display: flex; gap: 6px; color: var(--muted); }
+.fmts svg { width: 18px; height: 18px; }
+
+/* Wallpaper page: all formats together */
+.detail { position: fixed; inset: 0; z-index: 15; background: var(--bg); overflow-y: auto; overscroll-behavior: contain; }
+.d-amb { position: fixed; inset: -10%; pointer-events: none; }
+.d-amb img { width: 100%; height: 100%; max-width: none; object-fit: cover; filter: blur(80px) saturate(1.3); opacity: .45; }
+.d-amb::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 35%, rgba(14,11,29,.2), rgba(14,11,29,.88) 70%); }
+.d-inner { position: relative; max-width: 1200px; margin-inline: auto; padding-inline: 20px; padding-block: calc(18px + env(safe-area-inset-top, 0px)) 56px; }
+.d-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.back, .navb { font: inherit; font-weight: 600; font-size: 14px; color: var(--fg); background: var(--glass); border: 1px solid var(--glass-line); border-radius: 999px; min-height: 44px; padding: 0 18px; cursor: pointer; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); display: inline-flex; align-items: center; gap: 8px; }
+.navb { width: 44px; padding: 0; justify-content: center; font-size: 20px; }
+.d-nav { display: flex; gap: 8px; }
+:is(.back, .navb, .dl, .scr):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.d-head { text-align: center; margin-block: 36px 8px; }
+.d-head h2 { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 4.6vw, 56px); letter-spacing: -.03em; margin: 0 0 6px; text-wrap: balance; }
+.d-head p { color: var(--muted); margin: 0; }
+.devices { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 40px 52px; margin-top: 44px; }
+.dev { display: flex; flex-direction: column; align-items: center; gap: 18px; min-width: 0; animation: rise .6s cubic-bezier(.2,.7,.2,1) both; }
+.dev:nth-child(2) { animation-delay: .08s; } .dev:nth-child(3) { animation-delay: .16s; }
+.frame { background: #120E24; border: 1px solid #3A3A52; box-shadow: 0 40px 80px -30px rgba(0,0,0,.85); }
+.scr { display: block; padding: 0; border: 0; overflow: hidden; width: 100%; cursor: zoom-in; background: #111; }
+.scr img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.dev.dev-phone { flex: 0 1 230px; } .dev.dev-phone .frame { width: 100%; border-radius: 38px; padding: 9px; } .dev.dev-phone .scr { aspect-ratio: 390 / 844; border-radius: 30px; }
+.dev.dev-tablet { flex: 0 1 350px; } .dev.dev-tablet .frame { width: 100%; border-radius: 30px; padding: 14px; } .dev.dev-tablet .scr { aspect-ratio: 3 / 4; border-radius: 16px; }
+.dev.dev-desktop { flex: 0 1 580px; } .dev.dev-desktop .frame { width: 100%; border-radius: 16px; padding: 12px; } .dev.dev-desktop .scr { aspect-ratio: 16 / 9; border-radius: 6px; }
+.stand { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: -18px; }
+.stand i { display: block; width: 16%; height: 46px; background: linear-gradient(#3A3A52, #1F1A36); }
+.stand b { display: block; width: 38%; height: 10px; border-radius: 6px 6px 3px 3px; background: #3A3A52; }
+.dev-meta { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
+.dev-meta strong { font-family: var(--display); font-weight: 500; font-size: 16px; }
+.dev-meta small { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+.dl { font: inherit; font-weight: 600; font-size: 14px; background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 12px; min-height: 44px; padding: 0 18px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 10px 26px -12px var(--accent); }
+.dl svg { width: 17px; height: 17px; }
+.dl[disabled] { opacity: .6; cursor: progress; }
+
+footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--glass-line); color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+/* Lightbox */
+.lightbox { position: fixed; inset: 0; z-index: 20; background: rgba(14, 11, 29, .94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 20px; }
+.lightbox img { max-height: 76vh; max-width: 100%; width: auto; border-radius: 16px; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+.lightbox p { margin: 0; color: var(--muted); font-size: 14px; text-align: center; }
+.close { position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); inset-inline-start: 14px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--glass-line); background: var(--glass); color: var(--fg); font-size: 22px; cursor: pointer; }
+.toast { position: fixed; z-index: 21; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); inset-inline: 0; margin-inline: auto; width: max-content; max-width: calc(100% - 40px); background: rgba(42, 30, 77, .92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: var(--fg); border: 1px solid var(--glass-line); border-radius: 14px; padding: 12px 18px; font-size: 15px; }
+
+.reveal { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.reveal.d2 { animation-delay: .12s; } .reveal.d3 { animation-delay: .24s; }
+@keyframes rise { from { transform: translateY(18px); } to { transform: none; } }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .stage { order: -1; }
+}
+@media (max-width: 600px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .card { padding: 7px 7px 12px; border-radius: 20px; gap: 10px; }
+  .cover { border-radius: 14px; }
+  .card-meta strong { font-size: 13px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .like { padding: 4px 6px; font-size: 12px; } .like svg { width: 17px; height: 17px; }
+  .fmts svg { width: 15px; height: 15px; }
+  .devices { gap: 34px; }
+  .dev.dev-phone { flex-basis: 60%; } .dev.dev-tablet { flex-basis: 85%; } .dev.dev-desktop { flex-basis: 100%; }
+  .chip span { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="ambient" aria-hidden="true"><img id="amb-a" alt=""><img id="amb-b" alt=""></div>
+<svg class="grain" aria-hidden="true" width="100%" height="100%"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+
+<div class="page" dir="ltr" lang="en">
+<div class="wrap">
+  <nav>
+    <div class="logo">Wallpaper Momo</div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow reveal">Original · Free</p>
+      <h1 class="reveal d2">Your screen deserves <span class="shine">something original</span></h1>
+      <p class="lede reveal d3">Motivational 3D type, chalkboard maths, doodle cars, a dusk sky over the river, an oil-painted shore, palms and geometry. 4K for your desktop and sized exactly for your phone.</p>
+      <p class="current" id="cur-name">Palm Sunset</p>
+      <p class="current-desc" id="cur-desc">The sun setting behind palms over the water</p>
+      <div class="rail" role="group" aria-label="Choose a collection" id="rail" hidden></div>
+      <div class="progress" aria-hidden="true" hidden><b id="prog"></b></div>
+    </div>
+
+    <div class="stage" aria-hidden="true">
+      <div class="laptop"><div class="screen"><div class="view" id="lap-view"></div></div><div class="base"></div></div>
+      <div class="phone"><div class="body"><div class="view" id="ph-view"><div class="island"></div><div class="clock" id="clock">9:41</div></div></div></div>
+    </div>
+  </section>
+
+  <div class="section-head" id="gallery">
+    <div><h2 id="sec-title">All wallpapers</h2><p id="sec-sub">Open one to see it on phone, tablet and desktop.</p></div>
+  </div>
+  <div class="toolbar">
+    <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Search wallpapers…" autocomplete="off" aria-label="Search wallpapers"></label>
+    <div class="tabs" role="tablist" aria-label="Sections" id="tabs"></div>
+  </div>
+  <div class="cards" id="cards"></div>
+
+  <footer><span>© Wallpaper Momo · Original designs for personal use.</span><span>Share them with your friends.</span></footer>
+</div>
+</div>
+
+<div class="detail" id="detail" hidden role="dialog" aria-modal="true" aria-labelledby="d-name">
+  <div class="d-amb" aria-hidden="true"><img id="d-amb" alt=""></div>
+  <div class="d-inner">
+    <div class="d-top">
+      <button type="button" class="back" id="d-back"><span aria-hidden="true">←</span> All wallpapers</button>
+      <div class="d-nav"><button type="button" class="navb" id="d-prev" aria-label="Previous wallpaper">‹</button><button type="button" class="navb" id="d-next" aria-label="Next wallpaper">›</button></div>
+    </div>
+    <div class="d-head"><h2 id="d-name"></h2><p id="d-desc"></p>
+      <div class="d-actions"><button type="button" class="like" id="d-like" aria-pressed="false"></button><button type="button" class="share-btn" id="d-share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share</button></div>
+    </div>
+    <div class="devices" id="devices"></div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button type="button" class="close" id="lb-close" aria-label="Close">×</button>
+  <img id="lb-img" alt="">
+  <p>Long-press the image (or right-click) to save it.</p>
+</div>
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-box" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <h3 id="sheet-title">Share this wallpaper</h3>
+    <div class="sheet-row">
+      <a id="sh-wa" target="_blank" rel="noopener"><i style="background:#25D366;color:#fff">✆</i>WhatsApp</a>
+      <a id="sh-tg" target="_blank" rel="noopener"><i style="background:#2AABEE;color:#fff">➤</i>Telegram</a>
+      <button type="button" id="sh-copy"><i style="background:var(--accent);color:var(--accent-ink)">⧉</i>Copy link</button>
+    </div>
+    <button type="button" class="sheet-close" id="sh-close">Close</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+/* ============================================================
+   ➕ إضافة خلفية جديدة:
+   1) ارفع صورها لمجلد img بهذي الأسماء:
+        اسم-phone.jpg  و  اسم-phone-thumb.jpg
+        (واختياري: اسم-desktop.jpg و اسم-desktop-thumb.jpg و اسم-tablet.jpg و اسم-tablet-thumb.jpg)
+   2) أضف سطر هنا. cat = القسم:  "anime"  أو  "series"  أو  "momo"  أو  "original"
+      مثال لخلفية موبايل بس:
+      { slug: "my-anime", name: "My Anime", desc: "وصف قصير", ext: "jpg", cat: "anime", kinds: ["phone"] },
+   ============================================================ */
+const C = [
+  { slug: "keep-going", name: "Keep Going", desc: "3D words sweeping in, warm orange and pink", ext: "jpg" },
+  { slug: "dream-big", name: "Dream Big", desc: "3D words sweeping in, cool cyan and blue", ext: "jpg" },
+  { slug: "stay-strong", name: "Stay Strong", desc: "3D words sweeping in, orange into violet and blue", ext: "jpg" },
+  { slug: "one-more-step", name: "One More Step", desc: "3D words sweeping in, sunny yellow and orange", ext: "jpg" },
+  { slug: "maths", name: "Maths Board", desc: "Chalk formulas and geometry on a dark board", ext: "jpg" },
+  { slug: "cars", name: "Car World", desc: "Cute doodle cars on three color panels" },
+  { slug: "bridge-dusk", name: "Bridge at Dusk", desc: "A purple sky over the river, seen from the bridge", ext: "jpg", kinds: ["phone"] },
+  { slug: "shore-oil", name: "Oil Shore", desc: "Sunset, gulls and waves in thick oil-paint strokes", ext: "jpg" },
+  { slug: "tigris", name: "Tigris Night", desc: "A crescent moon over golden waves" },
+  { slug: "star", name: "Eight Star", desc: "Geometric pattern with an eight-point star" },
+  { slug: "palm", name: "Palm Sunset", desc: "The sun setting behind palms over the water" }
+];
+C.forEach(c => { if (!c.cat) c.cat = "original"; });
+
+/* ============================================================
+   🔥 Firebase (للايكات). الصق الإعدادات من Firebase بين القوسين.
+   إذا بقت null، اللايكات تشتغل بس على جهاز الزائر نفسه.
+   ============================================================ */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBi34jNcBSh0u0q7V1YNzxP-e12UMUCIFQ",
+  authDomain: "wallpapermomo.firebaseapp.com",
+  projectId: "wallpapermomo",
+  storageBucket: "wallpapermomo.firebasestorage.app",
+  messagingSenderId: "362275457913",
+  appId: "1:362275457913:web:7c0fd49efd4cda79f4bda8"
+};
+const SIZE = { phone: "1170 × 2532", tablet: "2048 × 2732", desktop: "3840 × 2160" };
+const LABEL = { phone: "Phone", tablet: "Tablet", desktop: "Desktop" };
+const DL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>';
+const has = (c, k) => !c.kinds || c.kinds.includes(k);
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Device views: one img per collection, crossfaded
+const lap = document.getElementById("lap-view"), ph = document.getElementById("ph-view");
+C.forEach((c, i) => {
+  const a = new Image(); a.src = "img/" + c.slug + "-" + (has(c, "desktop") ? "desktop" : "phone") + "-thumb.jpg"; a.alt = ""; if (!i) a.className = "on"; lap.append(a);
+  const b = new Image(); b.src = "img/" + c.slug + "-phone-thumb.jpg"; b.alt = ""; if (!i) b.className = "on"; ph.prepend(b);
+});
+
+// Rail chips
+const rail = document.getElementById("rail");
+C.forEach((c, i) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip"; b.id = "chip-" + c.slug;
+  b.setAttribute("aria-pressed", String(i === 0));
+  b.innerHTML = '<img src="img/' + c.slug + '-phone-thumb.jpg" alt=""><span></span>';
+  b.querySelector("span").textContent = c.name;
+  b.addEventListener("click", () => { select(i); restartTimer(); });
+  rail.append(b);
+});
+
+// Ambient
+const ambA = document.getElementById("amb-a"), ambB = document.getElementById("amb-b");
+let ambFront = ambA;
+function setAmbient(c) {
+  const back = ambFront === ambA ? ambB : ambA;
+  back.src = "img/" + c.slug + "-" + (has(c, "desktop") ? "desktop" : "phone") + "-thumb.jpg";
+  back.classList.add("on"); ambFront.classList.remove("on"); ambFront = back;
+}
+
+let cur = 0;
+function select(i) {
+  cur = i;
+  const c = C[i];
+  [...lap.querySelectorAll("img")].forEach((im, k) => im.classList.toggle("on", k === i));
+  [...ph.querySelectorAll("img")].forEach(im => im.classList.toggle("on", im.src.includes("/" + c.slug + "-")));
+  rail.querySelectorAll(".chip").forEach((b, k) => b.setAttribute("aria-pressed", String(k === i)));
+  document.getElementById("cur-name").textContent = c.name;
+  document.getElementById("cur-desc").textContent = c.desc;
+  setAmbient(c);
+  document.querySelector(".stage").classList.toggle("phone-only", !has(c, "desktop"));
+}
+
+// Auto-rotate
+const prog = document.getElementById("prog");
+let timer = null;
+function restartTimer() {
+  clearInterval(timer);
+  if (reduced) return;
+  prog.classList.remove("run"); void prog.offsetWidth; prog.classList.add("run");
+  timer = setInterval(() => { select((cur + 1) % C.length); prog.classList.remove("run"); void prog.offsetWidth; prog.classList.add("run"); }, 7000);
+}
+
+// Live clock on the phone
+function tick() { const d = new Date(); document.getElementById("clock").textContent = d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0"); }
+tick(); setInterval(tick, 20000);
+
+// Gallery cards
+const ICON = {
+  phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>',
+  tablet: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4.5" y="2.5" width="15" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>',
+  desktop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="4" width="19" height="12.5" rx="1.8"/><path d="M9 20.5h6M12 16.5v4"/></svg>'
+};
+const KINDS = ["phone", "tablet", "desktop"];
+const HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 7.9 3.6 4.5 7 4.5c2 0 3.6 1.1 5 2.9 1.4-1.8 3-2.9 5-2.9 3.4 0 5.6 3.4 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2Z"/></svg>';
+const cards = document.getElementById("cards");
+const cardEls = {};
+C.forEach((c, i) => {
+  const el = document.createElement("article");
+  el.className = "card"; el.id = "card-" + c.slug;
+  el.innerHTML = '<button type="button" class="card-open"><div class="cover"><img loading="lazy" alt="" src="img/' + c.slug + '-phone-thumb.jpg">' + (i < 4 ? '<span class="new">New</span>' : '') + '<span class="rank" hidden></span></div></button>' +
+    '<div class="card-meta"><strong></strong><button type="button" class="like" aria-pressed="false" data-slug="' + c.slug + '"></button></div>';
+  el.querySelector("strong").textContent = c.name;
+  el.querySelector(".card-open").setAttribute("aria-label", "Open " + c.name);
+  el.querySelector(".card-open").addEventListener("click", () => { location.hash = c.slug; });
+  el.querySelector(".like").addEventListener("click", e => toggleLike(c.slug, e.currentTarget));
+  cardEls[c.slug] = el;
+  cards.append(el);
+});
+const emptyEl = document.createElement("div");
+emptyEl.className = "empty"; emptyEl.hidden = true;
+cards.append(emptyEl);
+
+// ── Sections + search ──
+const SECTIONS = [
+  { id: "all", label: "All", title: "All wallpapers", sub: "Open one to see it on phone, tablet and desktop." },
+  { id: "top", label: "🔥 Most liked", title: "Most liked", sub: "The wallpapers people love most." },
+  { id: "anime", label: "Anime", title: "Anime", sub: "Wallpapers from your favourite anime." },
+  { id: "series", label: "Series", title: "Series", sub: "Wallpapers from TV series." },
+  { id: "momo", label: "💜 Momo's picks", title: "Momo's picks", sub: "Hand-picked by Momo — the ones I love." },
+  { id: "original", label: "Originals", title: "Originals", sub: "Original designs by Wallpaper Momo." }
+];
+let section = "all", query = "";
+const tabsEl = document.getElementById("tabs");
+SECTIONS.forEach(sec => {
+  const t = document.createElement("button");
+  t.type = "button"; t.className = "tab"; t.setAttribute("role", "tab");
+  t.dataset.id = sec.id; t.textContent = sec.label;
+  t.setAttribute("aria-selected", String(sec.id === section));
+  t.addEventListener("click", () => { section = sec.id; renderCards(); });
+  tabsEl.append(t);
+});
+const qEl = document.getElementById("q");
+qEl.addEventListener("input", () => { query = qEl.value.trim().toLowerCase(); renderCards(); });
+
+function renderCards() {
+  const sec = SECTIONS.find(x => x.id === section);
+  tabsEl.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.id === section)));
+  document.getElementById("sec-title").textContent = query ? "Search results" : sec.title;
+  document.getElementById("sec-sub").textContent = query ? "Matching “" + qEl.value.trim() + "”" : sec.sub;
+  let list = C.filter(c => section === "all" || section === "top" || c.cat === section);
+  if (query) list = list.filter(c => (c.name + " " + c.desc + " " + c.cat).toLowerCase().includes(query));
+  if (section === "top") list = list.slice().sort((a, b) => countOf(b.slug) - countOf(a.slug));
+  const shown = new Set(list.map(c => c.slug));
+  C.forEach(c => { cardEls[c.slug].hidden = !shown.has(c.slug); });
+  list.forEach((c, k) => {
+    const el = cardEls[c.slug]; cards.insertBefore(el, emptyEl);
+    const r = el.querySelector(".rank");
+    r.hidden = !(section === "top" && countOf(c.slug) > 0 && k < 3);
+    r.textContent = "#" + (k + 1);
+  });
+  emptyEl.hidden = list.length > 0;
+  emptyEl.innerHTML = query
+    ? "<strong>Nothing found</strong>Try another word."
+    : "<strong>Coming soon</strong>New wallpapers are on the way — check back soon.";
+}
+
+// ── Likes ──
+const LIKED_KEY = "momo-liked";
+let liked = new Set();
+try { liked = new Set(JSON.parse(localStorage.getItem(LIKED_KEY) || "[]")); } catch (e) {}
+const counts = {};
+let fb = null;
+function countOf(slug) { return Math.max(counts[slug] || 0, liked.has(slug) && !fb ? 1 : 0); }
+function fmt(n) { return n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k" : String(n); }
+function paintLikes() {
+  document.querySelectorAll(".like[data-slug]").forEach(b => {
+    const s = b.dataset.slug, on = liked.has(s);
+    b.setAttribute("aria-pressed", String(on));
+    b.setAttribute("aria-label", (on ? "Unlike " : "Like ") + ((C.find(c => c.slug === s) || {}).name || ""));
+    b.innerHTML = HEART + "<span>" + fmt(countOf(s)) + "</span>";
+  });
+}
+function saveLiked() { try { localStorage.setItem(LIKED_KEY, JSON.stringify([...liked])); } catch (e) {} }
+function toggleLike(slug, btn) {
+  const delta = liked.has(slug) ? -1 : 1;
+  if (delta > 0) liked.add(slug); else liked.delete(slug);
+  counts[slug] = Math.max(0, (counts[slug] || 0) + delta);
+  saveLiked(); paintLikes();
+  if (btn) { btn.classList.add("pop"); setTimeout(() => btn.classList.remove("pop"), 260); }
+  if (section === "top") renderCards();
+  if (fb) {
+    fb.fs.setDoc(fb.fs.doc(fb.db, "likes", slug), { count: fb.fs.increment(delta) }, { merge: true })
+      .catch(() => {
+        if (delta > 0) liked.delete(slug); else liked.add(slug);
+        counts[slug] = Math.max(0, (counts[slug] || 0) - delta);
+        saveLiked(); paintLikes(); say("Couldn't save your like. Try again.");
+      });
+  }
+}
+async function initFirebase() {
+  if (!FIREBASE_CONFIG) return;
+  try {
+    const V = "10.12.2";
+    const appMod = await import("https://www.gstatic.com/firebasejs/" + V + "/firebase-app.js");
+    const fs = await import("https://www.gstatic.com/firebasejs/" + V + "/firebase-firestore.js");
+    const db = fs.getFirestore(appMod.initializeApp(FIREBASE_CONFIG));
+    fb = { fs, db };
+    fs.onSnapshot(fs.collection(db, "likes"), snap => {
+      snap.forEach(d => { counts[d.id] = Math.max(0, d.data().count || 0); });
+      paintLikes();
+      if (section === "top") renderCards();
+    }, err => console.warn("likes:", err));
+  } catch (e) { console.warn("Firebase failed to load", e); }
+}
+
+// ── Share ──
+const sheet = document.getElementById("sheet");
+let shareUrl = "";
+function shareWallpaper(c) {
+  shareUrl = location.origin + location.pathname + "#" + c.slug;
+  const text = c.name + " — free wallpaper from Wallpaper Momo";
+  if (navigator.share) { navigator.share({ title: text, text, url: shareUrl }).catch(() => {}); return; }
+  document.getElementById("sh-wa").href = "https://wa.me/?text=" + encodeURIComponent(text + " " + shareUrl);
+  document.getElementById("sh-tg").href = "https://t.me/share/url?url=" + encodeURIComponent(shareUrl) + "&text=" + encodeURIComponent(text);
+  sheet.hidden = false; document.getElementById("sh-close").focus();
+}
+document.getElementById("sh-close").addEventListener("click", () => { sheet.hidden = true; });
+sheet.addEventListener("click", e => { if (e.target === sheet) sheet.hidden = true; });
+document.getElementById("sh-copy").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText(shareUrl); say("Link copied!"); }
+  catch (e) { prompt("Copy this link:", shareUrl); }
+  sheet.hidden = true;
+});
+
+// Wallpaper page
+const detail = document.getElementById("detail"), devices = document.getElementById("devices");
+let open = -1;
+function showDetail(i) {
+  open = i; const c = C[i];
+  document.getElementById("d-name").textContent = c.name;
+  document.getElementById("d-desc").textContent = c.desc;
+  document.getElementById("d-like").dataset.slug = c.slug;
+  paintLikes();
+  document.getElementById("d-amb").src = "img/" + c.slug + "-" + (has(c, "desktop") ? "desktop" : "phone") + "-thumb.jpg";
+  devices.innerHTML = "";
+  KINDS.filter(k => has(c, k)).forEach(kind => {
+    const d = document.createElement("div"); d.className = "dev dev-" + kind;
+    d.innerHTML = '<div class="frame"><button type="button" class="scr" aria-label="View ' + LABEL[kind] + ' version full size"><img alt="" src="img/' + c.slug + '-' + kind + '-thumb.jpg"></button></div>' +
+      (kind === "desktop" ? '<div class="stand" aria-hidden="true"><i></i><b></b></div>' : '') +
+      '<div class="dev-meta"><strong>' + LABEL[kind] + '</strong><small>' + ((c.sizes && c.sizes[kind]) || SIZE[kind]) + '</small><button type="button" class="dl">' + DL + '<span>Download</span></button></div>';
+    d.querySelector(".scr").addEventListener("click", () => openLightbox(c.slug, kind));
+    d.querySelector(".dl").addEventListener("click", e => download(e.currentTarget, c.slug, kind));
+    devices.append(d);
+  });
+  detail.hidden = false; detail.scrollTop = 0; document.body.style.overflow = "hidden";
+  document.getElementById("d-back").focus({ preventScroll: true });
+}
+function hideDetail() {
+  if (open < 0) return;
+  const last = C[open]; open = -1; detail.hidden = true; document.body.style.overflow = "";
+  const card = document.getElementById("card-" + last.slug); if (card && !card.hidden) { card.scrollIntoView({ block: "center" }); card.querySelector(".card-open").focus({ preventScroll: true }); }
+}
+function route() {
+  const i = C.findIndex(c => c.slug === location.hash.slice(1));
+  if (i >= 0) showDetail(i); else hideDetail();
+}
+window.addEventListener("hashchange", route);
+document.getElementById("d-back").addEventListener("click", () => { location.hash = "gallery"; });
+document.getElementById("d-prev").addEventListener("click", () => { location.hash = C[(open - 1 + C.length) % C.length].slug; });
+document.getElementById("d-next").addEventListener("click", () => { location.hash = C[(open + 1) % C.length].slug; });
+document.getElementById("d-like").addEventListener("click", e => toggleLike(e.currentTarget.dataset.slug, e.currentTarget));
+document.getElementById("d-share").addEventListener("click", () => { if (open >= 0) shareWallpaper(C[open]); });
+detail.addEventListener("keydown", e => { if (e.key === "Escape" && lb.hidden) location.hash = "gallery"; });
+
+// Lightbox
+const lb = document.getElementById("lightbox"), lbImg = document.getElementById("lb-img");
+function openLightbox(slug, kind) { lbImg.src = "img/" + slug + "-" + kind + "." + extOf(slug, kind); lb.hidden = false; document.getElementById("lb-close").focus(); }
+function closeLightbox() { lb.hidden = true; lbImg.removeAttribute("src"); }
+document.getElementById("lb-close").addEventListener("click", closeLightbox);
+lb.addEventListener("click", e => { if (e.target === lb) closeLightbox(); });
+lb.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+
+// Toast
+const toast = document.getElementById("toast"); let tt;
+function say(m) { toast.textContent = m; toast.hidden = false; clearTimeout(tt); tt = setTimeout(() => toast.hidden = true, 3200); }
+
+// Downloads
+let downloads = null;
+(async () => { try { downloads = window.claude ? await window.claude.use("downloads") : null; } catch (e) { downloads = null; } })();
+
+function extOf(slug, kind) { const c = C.find(c => c.slug === slug) || {}; return kind === "tablet" ? "jpg" : (c.ext || "png"); }
+async function download(btn, slug, kind) {
+  if (!downloads) {
+    if (window.claude) { openLightbox(slug, kind); return; }
+    const link = document.createElement("a");
+    link.href = "img/" + slug + "-" + kind + "." + extOf(slug, kind);
+    link.download = "wallpaper-momo-" + slug + "-" + kind + "." + extOf(slug, kind);
+    document.body.append(link); link.click(); link.remove();
+    say("Downloading… enjoy your new screen!");
+    return;
+  }
+  btn.disabled = true;
+  try {
+    const res = await fetch("img/" + slug + "-" + kind + "." + extOf(slug, kind));
+    if (!res.ok) throw { code: "fetch" };
+    await downloads.save({ filename: "wallpaper-momo-" + slug + "-" + kind + "." + extOf(slug, kind), data: await res.blob() });
+    say("Downloaded. Enjoy your new screen!");
+  } catch (err) {
+    const code = err && err.code;
+    if (code === "declined") {}
+    else if (code === "rate_limited") say("A download is already open. Finish it, then try again.");
+    else { say("Download isn't available here, so we opened the image for you to save."); openLightbox(slug, kind); }
+  } finally { btn.disabled = false; }
+}
+
+select(Math.max(0, C.findIndex(c => c.slug === "palm")));
+renderCards();
+paintLikes();
+initFirebase();
+route();
+</script>
+
+<script>
+/* Wallpaper Momo — Intro */
+/*!
+ * Wallpaper Momo — Intro
+ * أضف سطر سكربت يحمّل intro.js قبل نهاية body بموقعك (شوف README).
+ * يشتغل مرة وحدة بكل زيارة، والمستخدم يكدر يضغط على الشاشة حتى يتخطاه.
+ */
+(function () {
+  "use strict";
+
+  // اسمح بإعادة التشغيل يدوياً: window.MomoIntro.play()
+  var KEY = "momo-intro-seen";
+  var TOTAL = 4200;      // مدة الإنترو كاملة بالمللي ثانية
+  var EXIT_AT = 3500;    // وقت بداية رفع الستارة
+
+  var CSS = `
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;800&family=Manrope:wght@400;500;600;700&display=swap');
+.momo-intro{position:fixed;inset:0;z-index:99999;overflow:hidden;background:#0E0B1D;
+  font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.momo-intro *{box-sizing:border-box}
+.momo-intro__glow{position:absolute;inset:0;opacity:0;animation:mi-fade .6s ease-out forwards;
+  background:
+    radial-gradient(60% 45% at 0% 45%, rgba(180,140,255,.7), transparent 70%),
+    radial-gradient(60% 45% at 100% 45%, rgba(180,140,255,.7), transparent 70%),
+    radial-gradient(80% 40% at 50% 0%, rgba(110,90,170,.55), transparent 75%),
+    radial-gradient(70% 30% at 50% 100%, rgba(90,59,140,.35), transparent 75%)}
+.momo-intro__glow::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(closest-side at 50% 50%, transparent 65%, rgba(14,11,29,.55));}
+.momo-intro__stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+
+/* ── أعمدة كروت الخلفيات ── */
+.momo-intro__wall-grid{position:absolute;left:50%;top:50%;display:flex;gap:clamp(10px,3vw,18px);
+  --cw:clamp(96px,27vw,170px);
+  transform:translate(-50%,-50%) rotate(-14deg) scale(1.55);opacity:0;
+  animation:mi-grid-in .9s cubic-bezier(.16,1,.3,1) .05s forwards,
+            mi-grid-dim .8s cubic-bezier(.65,0,.35,1) 1.55s forwards}
+.momo-col{display:flex;flex-direction:column;gap:clamp(10px,3vw,18px);
+  animation:mi-col-up 4.2s linear forwards}
+.momo-col:nth-child(even){animation-name:mi-col-down}
+.momo-card{width:var(--cw);aspect-ratio:9/16;border-radius:clamp(14px,4vw,22px);flex:none;
+  position:relative;overflow:hidden;box-shadow:0 20px 40px rgba(5,3,15,.5)}
+.momo-card::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.16) 48%,transparent 60%)}
+.momo-card i{position:absolute;border-radius:50%;filter:blur(1px)}
+.momo-intro__veil{position:absolute;inset:0;opacity:0;
+  background:radial-gradient(closest-side at 50% 50%, rgba(14,11,29,.9), rgba(14,11,29,.35));
+  animation:mi-fade .8s ease 1.6s forwards}
+
+/* ── حلقة الانفجار ── */
+.momo-intro__ring{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px 0 0 -60px;
+  border-radius:50%;border:2px solid #C9C2E3;opacity:0;transform:scale(0);
+  animation:mi-ring .9s cubic-bezier(.16,1,.3,1) 1.75s forwards}
+.momo-intro__ring.r2{border-color:#8B7CC7;animation-delay:1.85s}
+.momo-intro__flash{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;
+  border-radius:50%;background:#fff;box-shadow:0 0 40px 18px rgba(180,140,255,.9);
+  opacity:0;transform:scale(0);animation:mi-flash .6s ease-out 1.7s forwards}
+
+/* ── النص ── */
+.momo-intro__text{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;pointer-events:none}
+.momo-intro__welcome{color:#C9C2E3;font-weight:500;font-size:clamp(12px,3.4vw,16px);
+  letter-spacing:.45em;text-transform:uppercase;margin-bottom:.6em;opacity:0;
+  transform:translateY(12px);animation:mi-up .6s cubic-bezier(.16,1,.3,1) 1.95s forwards;
+  padding-left:.45em}
+.momo-line{display:block;overflow:hidden;padding:0 .08em;line-height:1.05}
+.momo-intro__wall{color:#E9E4F7;font-family:'Unbounded',system-ui,sans-serif;font-weight:300;font-size:clamp(28px,9vw,78px);letter-spacing:.02em}
+.momo-intro__wall .ch{display:inline-block;transform:translateY(115%);
+  animation:mi-rise .65s cubic-bezier(.16,1,.3,1) forwards;animation-delay:calc(2000ms + var(--i)*45ms)}
+.momo-intro__momo{font-family:'Unbounded',system-ui,sans-serif;font-weight:800;font-size:clamp(54px,19vw,168px);letter-spacing:-.03em;
+  line-height:.95;margin-top:-.04em;filter:drop-shadow(0 0 28px rgba(180,140,255,.45))}
+.momo-intro__momo .ch{display:inline-block;color:transparent;-webkit-background-clip:text;background-clip:text;
+  background-image:linear-gradient(100deg,#F3F0FB 0%,#C9C2E3 30%,#8B7CC7 65%,#B48CFF 100%);
+  background-repeat:no-repeat;opacity:0;transform:scale(.25) translateY(30%);
+  animation:mi-pop .75s cubic-bezier(.34,1.56,.64,1) forwards;animation-delay:calc(2380ms + var(--i)*75ms)}
+.momo-intro__bar{width:0;height:3px;border-radius:3px;margin-top:.9em;
+  background:linear-gradient(90deg,#5A3B8C,#C9C2E3,#5A3B8C);
+  animation:mi-bar .7s cubic-bezier(.16,1,.3,1) 2.9s forwards}
+.momo-intro__skip{position:absolute;bottom:max(28px,env(safe-area-inset-bottom));left:0;right:0;
+  text-align:center;color:#8B7CC7;font-size:12px;letter-spacing:.3em;text-transform:uppercase;
+  opacity:0;animation:mi-fade .5s ease 1s forwards;padding-left:.3em}
+
+/* ── الخروج: ستارتين ترتفع ── */
+.momo-intro.is-leaving .momo-intro__skip{opacity:0!important;transition:opacity .2s}
+.momo-intro__curtain{position:fixed;inset:0;z-index:99998;background:#5A3B8C;pointer-events:none;
+  transform:translateY(0);border-radius:0 0 50% 50% / 0 0 0 0}
+.momo-intro.is-leaving{animation:mi-lift .7s cubic-bezier(.76,0,.24,1) forwards}
+.momo-intro__curtain.is-leaving{animation:mi-lift .7s cubic-bezier(.76,0,.24,1) .12s forwards}
+
+@keyframes mi-fade{to{opacity:1}}
+@keyframes mi-grid-in{from{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1.9)}
+  to{opacity:1;transform:translate(-50%,-50%) rotate(-14deg) scale(1.55)}}
+@keyframes mi-grid-dim{from{opacity:1;transform:translate(-50%,-50%) rotate(-14deg) scale(1.55)}
+  to{opacity:.55;transform:translate(-50%,-50%) rotate(-10deg) scale(1.35)}}
+@keyframes mi-col-up{from{transform:translateY(8%)}to{transform:translateY(-22%)}}
+@keyframes mi-col-down{from{transform:translateY(-22%)}to{transform:translateY(8%)}}
+@keyframes mi-ring{0%{opacity:1;transform:scale(0)}100%{opacity:0;transform:scale(7)}}
+@keyframes mi-flash{0%{opacity:0;transform:scale(0)}35%{opacity:1;transform:scale(1.4)}100%{opacity:0;transform:scale(.2)}}
+@keyframes mi-up{to{opacity:.9;transform:none}}
+@keyframes mi-rise{to{transform:translateY(0)}}
+@keyframes mi-pop{to{opacity:1;transform:none}}
+@keyframes mi-bar{to{width:min(56vw,320px)}}
+@keyframes mi-lift{to{transform:translateY(-105%);border-radius:0 0 50% 50% / 0 0 18% 18%}}
+
+@media (prefers-reduced-motion: reduce){
+  .momo-col{animation:none!important}.momo-intro__ring,.momo-intro__flash{display:none}
+  .momo-intro__welcome,.momo-intro__wall .ch,.momo-intro__momo .ch,.momo-intro__bar{
+    animation-duration:.01ms!important;animation-delay:0s!important}
+}
+`;
+
+  function splitLetters(el, text) {
+    for (var i = 0; i < text.length; i++) {
+      var s = document.createElement("span");
+      s.className = "ch";
+      s.style.setProperty("--i", i);
+      s.textContent = text[i];
+      el.appendChild(s);
+    }
+  }
+
+  // تدرج لوني واحد يمر على كل الكلمة بدل ما يتكرر بكل حرف
+  function spanGradient(word) {
+    // offsetLeft/offsetWidth ما تتأثر بحركة التكبير، فالتدرج يبقى صحيح
+    var chars = word.querySelectorAll(".ch");
+    var first = chars[0], last = chars[chars.length - 1];
+    var total = last.offsetLeft + last.offsetWidth - first.offsetLeft;
+    chars.forEach(function (c) {
+      c.style.backgroundSize = total + "px 100%";
+      c.style.backgroundPosition = -(c.offsetLeft - first.offsetLeft) + "px 0";
+    });
+  }
+
+  function play() {
+    if (document.querySelector(".momo-intro")) return;
+
+    if (!document.getElementById("momo-intro-css")) {
+      var st = document.createElement("style");
+      st.id = "momo-intro-css";
+      st.textContent = CSS;
+      document.head.appendChild(st);
+    }
+
+    var root = document.createElement("div");
+    root.className = "momo-intro";
+    root.setAttribute("role", "presentation");
+    root.innerHTML =
+      '<div class="momo-intro__glow"></div>' +
+      '<div class="momo-intro__wall-grid"></div>' +
+      '<div class="momo-intro__veil"></div>' +
+      '<div class="momo-intro__flash"></div>' +
+      '<div class="momo-intro__ring"></div><div class="momo-intro__ring r2"></div>' +
+      '<div class="momo-intro__text">' +
+        '<div class="momo-intro__welcome">Welcome to</div>' +
+        '<span class="momo-line momo-intro__wall"></span>' +
+        '<span class="momo-line momo-intro__momo"></span>' +
+        '<div class="momo-intro__bar"></div>' +
+      '</div>' +
+      '<div class="momo-intro__skip">tap to skip</div>';
+
+    // كروت خلفيات وهمية بتدرجات من ألوان الباليت
+    var grid = root.querySelector(".momo-intro__wall-grid");
+    var C = ["#0E0B1D", "#2A1E4D", "#5A3B8C", "#8B7CC7", "#C9C2E3", "#3A3A52"];
+    var seed = 7;
+    function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+    for (var c = 0; c < 4; c++) {
+      var col = document.createElement("div");
+      col.className = "momo-col";
+      for (var k = 0; k < 6; k++) {
+        var a1 = C[Math.floor(rnd() * 6)], a2 = C[Math.floor(rnd() * 6)];
+        if (a1 === a2) a2 = C[(C.indexOf(a1) + 2) % 6];
+        var card = document.createElement("div");
+        card.className = "momo-card";
+        card.style.background = "linear-gradient(" + Math.floor(120 + rnd() * 100) + "deg," + a1 + "," + a2 + ")";
+        // دوائر ضوء ناعمة حتى تبين مثل خلفية حقيقية
+        for (var o = 0; o < 2; o++) {
+          var orb = document.createElement("i");
+          var sz = 40 + rnd() * 70;
+          orb.style.cssText = "width:" + sz + "%;aspect-ratio:1;left:" + (rnd() * 80 - 20) + "%;top:" +
+            (rnd() * 85 - 10) + "%;background:radial-gradient(circle," + C[2 + Math.floor(rnd() * 3)] +
+            "aa,transparent 70%)";
+          card.appendChild(orb);
+        }
+        col.appendChild(card);
+      }
+      grid.appendChild(col);
+    }
+
+    splitLetters(root.querySelector(".momo-intro__wall"), "Wallpaper");
+    var momo = root.querySelector(".momo-intro__momo");
+    splitLetters(momo, "Momo");
+
+    var curtain = document.createElement("div");
+    curtain.className = "momo-intro__curtain";
+
+    var html = document.documentElement;
+    var prevOverflow = html.style.overflow;
+    html.style.overflow = "hidden";
+
+    document.body.appendChild(curtain);
+    document.body.appendChild(root);
+
+    var setGrad = function () { spanGradient(momo); };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setGrad);
+    requestAnimationFrame(setGrad);
+
+    var leaving = false, timers = [];
+    function leave() {
+      if (leaving) return;
+      leaving = true;
+      timers.forEach(clearTimeout);
+      root.classList.add("is-leaving");
+      curtain.classList.add("is-leaving");
+      setTimeout(finish, 900);
+    }
+    function finish() {
+      root.remove();
+      curtain.remove();
+      html.style.overflow = prevOverflow;
+      try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+      window.dispatchEvent(new CustomEvent("momo:intro-done"));
+    }
+
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    timers.push(setTimeout(leave, reduce ? 1400 : EXIT_AT));
+    root.addEventListener("click", leave);
+    document.addEventListener("keydown", function onKey(e) {
+      if (e.key === "Escape" || e.key === "Enter" || e.key === " ") {
+        document.removeEventListener("keydown", onKey);
+        leave();
+      }
+    });
+  }
+
+  window.MomoIntro = { play: play, duration: TOTAL };
+
+  var seen = false;
+  try { seen = sessionStorage.getItem(KEY) === "1"; } catch (e) {}
+  if (!seen) {
+    if (document.body) play();
+    else document.addEventListener("DOMContentLoaded", play);
+  }
+})();
+
+</script>
+
+</body>
+</html>
