@@ -312,7 +312,7 @@ footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--glass-
    1) ارفع صورها لمجلد img بهذي الأسماء:
         اسم-phone.jpg  و  اسم-phone-thumb.jpg
         (واختياري: اسم-desktop.jpg و اسم-desktop-thumb.jpg و اسم-tablet.jpg و اسم-tablet-thumb.jpg)
-   2) أضف سطر هنا. cat = القسم:  "anime"  أو  "series"  أو  "momo"  أو  "original"
+   2) أضف سطر هنا. cat = القسم:  "anime" أو "series" أو "movies" أو "cartoons" أو "football" أو "momo" أو "original"
       مثال لخلفية موبايل بس:
       { slug: "my-anime", name: "My Anime", desc: "وصف قصير", ext: "jpg", cat: "anime", kinds: ["phone"] },
    ============================================================ */
@@ -327,7 +327,60 @@ const C = [
   { slug: "shore-oil", name: "Oil Shore", desc: "Sunset, gulls and waves in thick oil-paint strokes", ext: "jpg" },
   { slug: "tigris", name: "Tigris Night", desc: "A crescent moon over golden waves" },
   { slug: "star", name: "Eight Star", desc: "Geometric pattern with an eight-point star" },
-  { slug: "palm", name: "Palm Sunset", desc: "The sun setting behind palms over the water" }
+  { slug: "palm", name: "Palm Sunset", desc: "The sun setting behind palms over the water" },
+  { slug: "polat-suit", name: "Polat · The Look", desc: "Polat Alemdar in a pinstripe suit, cigarette in hand", ext: "jpg", cat: "series", kinds: ["phone", "desktop"], sizes: { phone: "736 × 1308", desktop: "2560 × 1440" } },
+  { slug: "polat-stairs", name: "Polat · Stairs", desc: "Polat on the red staircase, lost in thought", ext: "jpg", cat: "series", kinds: ["phone", "desktop"], sizes: { phone: "736 × 1308", desktop: "2560 × 1440" } },
+  { slug: "polat-city", name: "Polat · Grey City", desc: "Polat against bare trees and a grey skyline", ext: "jpg", cat: "series", kinds: ["phone", "desktop"], sizes: { phone: "736 × 1308", desktop: "2560 × 1440" } },
+  { slug: "polat-snow", name: "Polat · Snow", desc: "A close portrait of Polat with snow on his scarf", ext: "jpg", cat: "series", kinds: ["phone", "desktop"], sizes: { phone: "644 × 1280", desktop: "2560 × 1440" } },
+  { slug: "polat-night", name: "Polat · Night", desc: "Polat sitting alone in a blue night park", ext: "jpg", cat: "series", kinds: ["phone", "desktop"], sizes: { phone: "736 × 1308", desktop: "2560 × 1440" } },
+  { slug: "iron-man", name: "Iron Man", desc: "Iron Man wrapped in red and blue light trails", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "captain-america", name: "Captain America", desc: "Cap glancing back through blue and red streaks", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "doctor-strange", name: "Doctor Strange", desc: "Strange in his red cloak inside a storm of colour", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "black-panther", name: "Black Panther", desc: "Black Panther in deep violet motion blur", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "thor", name: "Thor", desc: "Thor with his hammer and electric-blue streaks", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "spider-2099", name: "Spider-Man 2099", desc: "Miguel O'Hara over a giant 2099 in neon red and blue", ext: "jpg", cat: "movies", kinds: ["desktop"], sizes: { desktop: "2560 × 1440" } },
+  { slug: "spider-2099-sketch", name: "Spider-Man 2099 · Sketch", desc: "Miguel in sketchy red and blue brush strokes", ext: "jpg", cat: "movies", kinds: ["desktop"], sizes: { desktop: "2560 × 1440" } },
+  { slug: "moon-knight", name: "Moon Knight", desc: "Moon Knight's cloak flowing under a pale moon", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "messi-crown", name: "Messi · Crowned", desc: "Black and white Messi wearing a crown", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "black-widow", name: "Black Widow", desc: "Black Widow in a storm of red and white light", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "shelby-chair", name: "Shelby · The Chair", desc: "Thomas Shelby in a dark room, a faint SHELBY above", ext: "jpg", cat: "series", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "shelby-smoke", name: "Shelby · Smoke", desc: "Shelby seated with smoke drifting into the dark", ext: "jpg", cat: "series", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "shelby-shadow", name: "Shelby · Shadow", desc: "A black-and-white silhouette in a flat cap", ext: "jpg", cat: "series", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "loki", name: "Loki", desc: "Loki looking back through green light", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "spider-man", name: "Spider-Man", desc: "Spider-Man in sweeping red light", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "miles-moon", name: "Miles · Moonlight", desc: "Miles Morales on a crane above the city, full moon behind", ext: "jpg", cat: "movies", kinds: ["desktop"], sizes: { desktop: "2560 × 1440" } },
+  { slug: "spider-glitch", name: "Spider-Man · Glitch", desc: "A glitching Spider-Man silhouette in orange haze", ext: "jpg", cat: "movies", kinds: ["desktop"], sizes: { desktop: "1920 × 1080" } },
+  { slug: "messi-king-blue", name: "Messi · King", desc: "Messi looking up, KING painted below", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "1170 × 2080", desktop: "2560 × 1440" } },
+  { slug: "messi-king-gold", name: "Messi · King Gold", desc: "Messi reaching up over a gold KING", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "1170 × 2532", desktop: "2560 × 1440" } },
+  { slug: "mcqueen", name: "Lightning McQueen", desc: "McQueen racing under the Milky Way", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "toothless-night", name: "Toothless · Night", desc: "Toothless glowing blue over the Viking village", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "toothless-flight", name: "Toothless · Flight", desc: "Toothless flying through deep blue clouds", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "hiccup-sunset", name: "Hiccup · Sunset", desc: "Hiccup's silhouette filled with a sunset over Berk", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "hiccup-stars", name: "Hiccup · Stars", desc: "Hiccup's silhouette filled with stars and Berk", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "light-fury", name: "Light Fury", desc: "The Light Fury among blue crystals and waterfalls", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "toothless-moon", name: "Toothless · Moon", desc: "Toothless by the sea under a full moon", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "finn-music", name: "Finn · Night Music", desc: "Finn with headphones on a rooftop in purple fog", ext: "jpg", cat: "cartoons", kinds: ["phone", "desktop"], sizes: { phone: "1206 × 2144", desktop: "2560 × 1440" } },
+  { slug: "gumball-music", name: "Gumball · Night Music", desc: "Gumball with headphones under a purple sky", ext: "jpg", cat: "cartoons", kinds: ["phone", "desktop"], sizes: { phone: "1206 × 2144", desktop: "2560 × 1440" } },
+  { slug: "patrick-music", name: "Patrick · Night Music", desc: "Patrick in a hoodie with headphones in purple fog", ext: "jpg", cat: "cartoons", kinds: ["phone", "desktop"], sizes: { phone: "1206 × 2144", desktop: "2560 × 1440" } },
+  { slug: "finn-jake-fire", name: "Finn & Jake · Campfire", desc: "Finn and Jake resting by a campfire", ext: "jpg", cat: "cartoons", kinds: ["phone", "desktop"], sizes: { phone: "1411 × 2532", desktop: "2560 × 1440" } },
+  { slug: "sponge-fire", name: "SpongeBob & Patrick · Campfire", desc: "SpongeBob and Patrick by the fire under the stars", ext: "jpg", cat: "cartoons", kinds: ["phone", "desktop"], sizes: { phone: "1411 × 2532", desktop: "2560 × 1440" } },
+  { slug: "courage-fire", name: "Eustace & Muriel · Campfire", desc: "Eustace and Muriel by a campfire at night", ext: "jpg", cat: "cartoons", kinds: ["phone", "desktop"], sizes: { phone: "1411 × 2532", desktop: "2560 × 1440" } },
+  { slug: "thorfinn-fire", name: "Thorfinn · Fire", desc: "Thorfinn walking into a red, burning sky", ext: "jpg", cat: "anime", kinds: ["phone", "desktop"], sizes: { phone: "1413 × 2532", desktop: "2560 × 1440" } },
+  { slug: "thorfinn-fog", name: "Thorfinn · Fog", desc: "Thorfinn's silhouette with two daggers in the fog", ext: "jpg", cat: "anime", kinds: ["phone", "desktop"], sizes: { phone: "1413 × 2532", desktop: "2560 × 1440" } },
+  { slug: "thorfinn-snow", name: "Thorfinn · Snow", desc: "Thorfinn standing in a snowstorm", ext: "jpg", cat: "anime", kinds: ["phone", "desktop"], sizes: { phone: "1411 × 2532", desktop: "2560 × 1440" } },
+  { slug: "cr7-legacy", name: "CR7 · Legacy", desc: "Ronaldo in front of a giant LEGACY", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "941 × 1672", desktop: "2560 × 1440" } },
+  { slug: "cr7-goat", name: "CR7 · The GOAT", desc: "Ronaldo in black and gold, THE GOAT behind him", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "941 × 1672", desktop: "2560 × 1440" } },
+  { slug: "cr7-icon", name: "CR7 · Icon", desc: "Ronaldo's arms-wide celebration under ICON", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "941 × 1672", desktop: "2560 × 1440" } },
+  { slug: "cr7-era", name: "CR7 · Era", desc: "A red collage of Ronaldo's United years", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "941 × 1672", desktop: "2560 × 1440" } },
+  { slug: "cr7-mentality", name: "CR7 · Mentality", desc: "Ronaldo shrugging in red smoke under MENTALITY", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "941 × 1672", desktop: "2560 × 1440" } },
+  { slug: "cr7-doubted", name: "CR7 · They Doubted Me", desc: "They doubted me, I proved them wrong", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "941 × 1672", desktop: "2560 × 1440" } },
+  { slug: "symbiote", name: "Symbiote", desc: "A black-suit Spider-Man walking into the light", ext: "jpg", cat: "movies", kinds: ["phone", "desktop"], sizes: { phone: "1419 × 2532", desktop: "2560 × 1440" } },
+  { slug: "eren-sky", name: "Eren · Violet Sky", desc: "Eren against a purple sunrise", ext: "jpg", cat: "anime", kinds: ["phone", "desktop"], sizes: { phone: "1080 × 2340", desktop: "2560 × 1440" } },
+  { slug: "hange-levi", name: "Hange & Levi", desc: "Hange and Levi under a sunset sky", ext: "jpg", cat: "anime", kinds: ["phone", "desktop"], sizes: { phone: "694 × 1200", desktop: "2560 × 1440" } },
+  { slug: "cr7-anime-trophy", name: "CR7 Anime · Trophy", desc: "Anime-style Ronaldo with the Champions League trophy", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "1424 × 2532", desktop: "2560 × 1440" } },
+  { slug: "cr7-anime-calma", name: "CR7 Anime · Calma", desc: "Anime-style Ronaldo's calm-down celebration", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "1424 × 2532", desktop: "2560 × 1440" } },
+  { slug: "cr7-anime-goal", name: "CR7 Anime · Goal", desc: "Anime-style Ronaldo, hands on hips by the goal", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "1424 × 2532", desktop: "2560 × 1440" } },
+  { slug: "cr7-anime-siu", name: "CR7 Anime · CR7", desc: "Shirtless anime-style Ronaldo under a brushed CR7", ext: "jpg", cat: "football", kinds: ["phone", "desktop"], sizes: { phone: "1424 × 2532", desktop: "2560 × 1440" } }
 ];
 C.forEach(c => { if (!c.cat) c.cat = "original"; });
 
@@ -436,6 +489,9 @@ const SECTIONS = [
   { id: "top", label: "🔥 Most liked", title: "Most liked", sub: "The wallpapers people love most." },
   { id: "anime", label: "Anime", title: "Anime", sub: "Wallpapers from your favourite anime." },
   { id: "series", label: "Series", title: "Series", sub: "Wallpapers from TV series." },
+  { id: "movies", label: "Movies", title: "Movies", sub: "Heroes and favourites from the big screen." },
+  { id: "cartoons", label: "Cartoons", title: "Cartoons", sub: "Cozy nights with your favourite cartoon characters." },
+  { id: "football", label: "Football", title: "Football", sub: "Legends of the game." },
   { id: "momo", label: "💜 Momo's picks", title: "Momo's picks", sub: "Hand-picked by Momo — the ones I love." },
   { id: "original", label: "Originals", title: "Originals", sub: "Original designs by Wallpaper Momo." }
 ];
